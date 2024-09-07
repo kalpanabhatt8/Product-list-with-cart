@@ -8,6 +8,7 @@
     --primary-color:#C83B0E;
     --text-heading-color:#2D2522;
     --body-text-color:#8B7D7B;
+    --background-color:#FCF8F5
 }
 @font-face {
     font-family: 'Red Hat Text';
@@ -38,7 +39,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color:#FCF8F5 ;
+    background-color:var(--background-color) ;
 }
 
 h2{
@@ -78,16 +79,61 @@ button:hover{
 }
 
 .cartDivDescription{
+    box-sizing: border-box;
     background-color: white;
     padding: 2rem;
     min-height: 40vh;
-    width:auto;
+    width:100%;
     border-radius:1rem
 }
 
+.Alldiv{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    min-height: 24vh;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.svgDiv{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 24vh;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.total{
+    font-weight: 600;
+    color: black;
+}
+
+.orderSum{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0rem 1rem 0rem;
+}
+
+.carbon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--background-color);
+    border-radius: 1rem;
+}
 .cartDiv{
     width: 100%;
     
+}
+
+.hide{
+    display: none ;
 }
 
 #desert{
@@ -157,7 +203,7 @@ button:hover{
 }
 
 .iconDiv{
-  
+    color: white;
     height: 18px;
     width: 18px;
     border-radius: 1rem;
@@ -176,15 +222,40 @@ button:hover{
 
 .productSelected{
     display: grid;
-    grid-template-columns: auto 32px;
+    grid-template-columns: auto 24px;
     width: 100%;
     gap: 24px;
-    align-items: start;
+    align-items: center;
+    padding: 1rem 1rem 1rem 0rem;
+    border-bottom: 1px solid #e0e0e0;
 }
-
-.divProducts{
+.Cdiv{
+    width: 100%;
+}
+.divProduct{
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+.CproductType{
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.iconDiv:hover{
+    background-color:white ;
+    color: var(--primary-color) !important;
+}
+
+.iconPlus:hover{
+    background-color:white ;
+    color: var(--primary-color) !important;
+}
+
+.iconMinus:hover{
+    background-color:white ;
+    color: var(--primary-color) !important;
 }
 
 .CcartProductDiv{
@@ -193,12 +264,220 @@ button:hover{
     gap: 8px;
 }
 
+.CproductNumber{
+    color: var(--primary-color);
+    font-weight:600 ;
+}
+
+.CproductPrice{
+    color: var(--body-text-color);
+    font-weight:600 ;
+
+}
+
+.CproductPriceMultiply{
+    color: var(--primary-color);
+    font-weight:600 ;
+
+}
+
 .removeButton{
     padding: 0px;
     background-color: transparent;
     border: none;
     width: fit-content;
 }
+
+.productNumbers{
+    color: white;
+}
+
+.totalPrice{
+    font-size: 24px;
+    color: black;
+    font-weight: 700;
+}
+
+#confirmOrder{
+padding: 0.75rem;
+border-radius: 4rem;
+border: none;
+width: 100%;
+background-color: var(--primary-color);
+color: white;
+}
+
+.orderConfirmed{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    
+}
+
+.orderSubmitDiv{
+    background-color: white;
+    padding: 2rem 2.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    width: 100%;
+    border-radius: 1rem;
+   
+}
+
+.imageDiv{
+    height: 48px;
+    width: 48px;
+    border-radius: 0.25rem;
+}
+
+.productImage{
+   height: 48px;
+   width: auto;
+   border-radius: 0.25rem;
+}
+
+.selectedProduct{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.productInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.orderDivParent{
+    min-width: 94vw;
+    min-height: 90vh;
+}
+.orderDiv{
+    width: 100%;
+    background-color: var(--background-color);
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e0e0e0;
+
+}
+.selectedProduct{
+    width: 100%;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.25rem;
+    width: 100%;
+    align-items: center;
+}
+
+.productQty{
+    display: flex;
+    gap: 0.75rem;
+}
+
+.productCateogry2{
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+}
+
+.totalPriceCart2{
+    font-size: 15px;
+    font-weight: 700;
+    color: black;
+    
+    
+}
+
+.totalPriceCart{
+    font-size: 22px;
+    font-weight: 700;
+    color: black;
+    
+    
+}
+
+.productNumber{
+    color: var(--primary-color);
+
+}
+
+.totalPriceCart1{
+    font-weight: 600;
+    color: var(--body-text-color);
+    
+}
+
+.orderSumCart{
+    background-color: var(--background-color);
+    box-sizing: border-box;
+    padding: 1rem 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#newOrder{
+    background-color: var(--primary-color);
+    color: white;
+    width: 100%;
+    padding: 1rem;
+    border:0px;
+    border-radius: 2rem;
+}
+
+.orderBox{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+
+.absoluteDiv{
+    background-color:rgba(0,0,0,0.25);
+    z-index: 1000;
+    width: 99vw;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    
+
+}
+
+.relative{
+    position: relative;
+    height: 90vh;
+    overflow: hidden;
+
+    
+}
+
+.absoluteDiv{
+    align-items: end;
+  
+}
+
+
+
+
 @media screen and (min-width: 320px) {
     .container{
         grid-template-columns: auto;
@@ -219,6 +498,10 @@ button:hover{
 
 
 @media screen and (min-width: 574px) {
+
+    .orderDivParent{
+        min-width: 54vw;
+    }
     .container{
         grid-template-columns: auto;
     }
@@ -242,6 +525,10 @@ button:hover{
 
 
 @media screen and (min-width: 1100px) {
+
+    .orderDivParent{
+        min-width: 24vw;
+    }
     .container{
         grid-template-columns: auto 30vw;
         gap: 1rem;
@@ -257,5 +544,11 @@ button:hover{
         border-radius: 0.75rem;
         max-height: 20vw;
         max-width: 20vw;
+    }
+    .absoluteDiv{
+        align-items: center;
+    }
+    .orderDivParent{
+        min-height: 50vh;
     }
 }

@@ -17,61 +17,9 @@ let selectedProduct = document.querySelector('selectedProduct')
 let totalPriceCart = document.querySelector('.totalPriceCart')
 let newOrder = document.querySelector('#newOrder')
 let absoluteDiv = document.querySelector('.absoluteDiv')
-let cartNumberAdded = document.querySelector('#cartNumberAdded')
-
-
-// Function to reset the values
-const resetCart = (productNumber) => {
-  // Reset global total price
-  productNumber = 0
-  globalTotalPrice = 0;
-  document.querySelector(".totalPrice").innerText = `$${globalTotalPrice.toFixed(2)}`;
-  document.querySelector(".totalPriceCart").innerText = `$${globalTotalPrice.toFixed(2)}`;
-  console.log(totalPriceCart, totalPriceCart, "this is cart total price")
-
-  // Reset each product's details
-  const productElements = divProduct.querySelectorAll(".productSelected");
-  productElements.forEach((product) => {
-    const productNumberElem = product.querySelector('.CproductNumber');
-    const productPriceElem = product.querySelector('.CproductPriceMultiply');
-    // if (productNumberElem && productPriceElem) {
-    productNumberElem.innerText = '0x';
-    productPriceElem.innerText = '$0';
-    // }
-  });
 
 
 
-
-  // Reset order details
-  const orderDivElements = orderConfirmed.querySelectorAll(".orderDiv");
-  orderDivElements.forEach(orderDiv => {
-    const productQtyElem = orderDiv.querySelector('.productNumber');
-    const totalPriceElem = orderDiv.querySelector('.totalPriceCart1');
-    const totalPriceBoldElem = orderDiv.querySelector('.totalPriceCart2');
-    if (productQtyElem && totalPriceElem && totalPriceBoldElem) {
-      productQtyElem.innerText = '0';
-      totalPriceElem.innerText = '$0';
-      totalPriceBoldElem.innerText = '$0';
-    }
-  });
-
-  // Reset other UI elements if necessary
-  allDiv.style.justifyContent = "start";
-  svgDiv.classList.remove("hide");
-  cartDiv.querySelector('.Cdiv').classList.add("hide");
-  cartDiv.querySelector('.orderSum').classList.add("hide");
-  cartDiv.querySelector('.carbon').classList.add("hide");
-  confirmOrder.classList.add("hide");
-}
-
-// Event listener for new order button
-newOrder.addEventListener('click', () => {
-  absoluteDiv.style.display = "none"; // Hide the order confirmation div
-  document.querySelector('section').classList.remove('relative');
-  resetCart();
-});
-let cartNumber = 0;
 let globalTotalPrice = 0;
 const dessertData = async () => {
 
@@ -116,18 +64,17 @@ const dessertData = async () => {
     `
     let totalPrice = `${item.price}`
     dessert.appendChild(divElt)
+    const updateGlobalPrice = () => {
+      cartDiv.querySelector('.totalPrice').innerText = `$${globalTotalPrice.toFixed(2)}`
+    }
 
 
 
     //addition work
     let imageDiv = divElt.querySelector('.desertImg')
     divElt.querySelector('.dessertButton').addEventListener('click', (event) => {
-      // const updateGlobalPrice = (globalTotalPrice) => {
-      //   cartDiv.querySelector('.totalPrice').innerText = `$${globalTotalPrice.toFixed(2)}`
-      // }
-      // globalTotalPrice = item.price;
-      // updateGlobalPrice(globalTotalPrice);
-      // console.log(globalTotalPrice, "this is global total price")
+      globalTotalPrice += item.price;
+      updateGlobalTotal();
       console.log("added to cart")
       event.target.style.backgroundColor = "#C83B0E"
       event.target.style.justifyContent = "space-between"
@@ -140,8 +87,8 @@ const dessertData = async () => {
           <button class="iconDiv iconMinus">
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 2"><path fill="#fff" d="M0 .375h10v1.25H0V.375Z"/></svg>
           </button>`
-      // globalTotalPrice = globalTotalPrice + item.price
-      // updateGlobalPrice()
+      globalTotalPrice = globalTotalPrice + item.price
+      updateGlobalPrice()
       // updateGlobalPrice()
       allDiv.style.justifyContent = "start"
       svgDiv.classList.add("hide")
@@ -186,10 +133,9 @@ const dessertData = async () => {
         // globalTotalPrice = globalTotalPrice + item.price;
         // console.log(globalTotalPrice, "this is GLOBAL TOTAL PRICE")
         // updateGlobalPrice();
-
-
+        globalTotalPrice += item.price; // Add the price of one more item to the total
+        updateGlobalTotal(); // Update displayed total
       })
-      // console.log(globalTotalPrice, "this is global total price")
 
 
 
@@ -204,9 +150,8 @@ const dessertData = async () => {
           totalPrice = totalPrice - `${item.price * productNumber}`
         }
 
-        // globalTotalPrice = globalTotalPrice - item.price;
-        // updateGlobalPrice(globalTotalPrice)
-
+        globalTotalPrice = globalTotalPrice - item.price;
+        updateGlobalPrice()
         console.log(totalPrice, "this is total price in minus")
         divElt.querySelector(".dessertButton").innerHTML = ""
         divElt.querySelector(".dessertButton").innerHTML =
@@ -219,7 +164,6 @@ const dessertData = async () => {
           </button>`
         console.log(productNumber, "ONE ITEM ADDED")
       })
-      // console.log(globalTotalPrice, "this is global total price")
 
 
 
@@ -249,21 +193,16 @@ const dessertData = async () => {
          <button class="removeButton"> <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><g fill="#8B7D7B"><path d="M16.34 9.322a1 1 0 1 0-1.364-1.463l-2.926 2.728L9.322 7.66A1 1 0 0 0 7.86 9.024l2.728 2.926l-2.927 2.728a1 1 0 1 0 1.364 1.462l2.926-2.727l2.728 2.926a1 1 0 1 0 1.462-1.363l-2.727-2.926z"/><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12m11 9a9 9 0 1 1 0-18a9 9 0 0 1 0 18" clip-rule="evenodd"/></g></svg></button>
      `
         console.log(`${item.price * productNumber}`, "this is multiplied product")
+        divProduct.appendChild(Cdiv)
 
-        if (productNumber === 0) {
-          let htmlDiv = Cdiv.innerHTML
-          divProduct.remove(htmlDiv)
-          console.log(htmlDiv, "thsifhdjkfhajklfdhadsjkfhadjlf..................................")
-
-        } else {
-          divProduct.appendChild(Cdiv)
-        }
       }
       else {
         let productQty = existingProduct.querySelector('.CproductNumber')
         let productPriceMultiply = existingProduct.querySelector('.CproductPriceMultiply')
         productQty.innerHTML = `${productNumber}x`
         productPriceMultiply.innerHTML = `$${item.price * productNumber}`
+
+
       }
 
 
@@ -272,9 +211,7 @@ const dessertData = async () => {
       orderDiv.setAttribute('id', item.name)
       let extistingCart = orderConfirmed.querySelector(`.orderDiv[id="${item.name}"]`)
       console.log(extistingCart, "this is existing cart")
-
       if (!extistingCart) {
-        cartNumber++
         orderDiv.innerHTML = `
           <div class="selectedProduct">
           
@@ -305,12 +242,9 @@ const dessertData = async () => {
 
           </div>
          `
-
-        cartNumberAdded.innerText = `(${cartNumber})`
         console.log(`this is item price: ${item.price}`)
         console.log(`this is item Total price: ${item.price * productNumber}`)
         orderConfirmed.appendChild(orderDiv)
-
       } else {
         let productQty = extistingCart.querySelector('.productNumber')
         let totalPrice = extistingCart.querySelector('.totalPriceCart1')
@@ -320,13 +254,11 @@ const dessertData = async () => {
         totalPriceBold.innerHTML = `$${item.price * productNumber}`
       }
 
-
       // const Cartdiv = document.createElement("div")
       // Cartdiv.classList.add(".selectedItem")
       // Cdiv.setAttribute('id', item.category)
       // let cartProduct = selectedProduct.querySelector(`.selectedItem[id="${item.category}"]`)
       // if(!cartProduct!){}
-
 
 
       let removeButton = document.querySelector('.removeButton')
@@ -336,40 +268,26 @@ const dessertData = async () => {
         orderConfirmed.appendChild(Cdiv)
       })
 
-
       let section = document.querySelector('section')
 
       confirmOrder.addEventListener('click', () => {
+        // document.querySelector('body').classList.add('relative')
         absoluteDiv.style.display = "flex"
         section.classList.add('relative')
+
       })
-
-
-      let price = 0
-      let productSum = document.querySelectorAll(".CproductPriceMultiply")
-      console.log(productSum, "NodeList")
-      productSum.forEach((div) => {
-        let onePriceRemove = div.textContent.trim()
-        console.log(onePriceRemove, "this is product Sumn 1")
-        let onePrice = onePriceRemove.replace(/[$]/, "")
-        console.log(onePrice, "this is product Sumn")
-        let onePriceNumber = Number(onePrice)
-        console.log(onePriceNumber, "this is product Sumn")
-        price += onePriceNumber;
-      })
-
-      console.log(price, "FINALLLLLLLLLLLLLLLY")
-      document.querySelector(".totalPrice").innerText = `$${price}`
-      document.querySelector(".totalPriceCart").innerText = `$${price}`
-
 
 
       newOrder.addEventListener('click', () => {
+        // let div = document.querySelector('body').remove(absoluteDiv)
         document.querySelector('body').removeChild(absoluteDiv)
         document.querySelector('section').classList.remove('relative')
+        document.querySelector(".divProduct").remove(Cdiv)
         productNumber = 0
-        price = 0
-        location.reload()
+        totalPrice = 0
+        globalTotalPrice = 0
+
+
       })
     })
   }
@@ -382,5 +300,3 @@ const dessertData = async () => {
 
 dessertData()
 // console.log(newOrder, "this is new order")
-
-

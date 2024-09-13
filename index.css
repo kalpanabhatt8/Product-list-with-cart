@@ -132,9 +132,6 @@ button:hover{
     
 }
 
-.hide{
-    display: none ;
-}
 
 #desert{
     padding: 1rem;
@@ -212,7 +209,8 @@ button:hover{
     align-items: center;
     padding: 4px;
     border:1px solid white;
-    background-color: transparent;
+    background-color: var(--primary-color);
+    
 }
 
 .cartProductDiv{
@@ -475,6 +473,28 @@ color: white;
   
 }
 
+.btn{
+    display: flex;
+    border: 1px solid white;
+    background-color: #C83B0E;
+    border: 1px solid var(--primary-color);
+    width: fit-content;
+    display:flex;
+    gap: 0.25rem;
+    padding: 0rem 0.75rem;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+    width: 10rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.hide{
+    display: none
+}
 
 
 

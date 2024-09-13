@@ -6,6 +6,7 @@ let svgDiv = document.querySelector('.svgDiv')
 let absoluteDiv = document.querySelector('.absoluteDiv')
 let orderConfirmed = document.querySelector(".orderConfirmed")
 let newOrder = document.querySelector('#newOrder')
+let section = document.querySelector('section')
 let count = 0
 const data = async () => {
   const url = await fetch('./data.json')
@@ -16,9 +17,10 @@ const data = async () => {
 
 data()
 
-
 //dynamically creating products
 const createProduct = (items) => {
+
+  section.classList.remove('sectionHeight')
   dessertDiv.innerHTML = ''
   items.forEach((item, index) => {
     let divElt = document.createElement('div')
@@ -89,7 +91,7 @@ const createProduct = (items) => {
 //adding items to cart & increasing number of items
 function addItems(index) {
   let productNumber = 1
-
+  section.classList.remove('sectionHeight')
   let dessertBtn = document.querySelectorAll('.dessertButton')
   let btnAll = document.querySelectorAll('.btn')
   let dessertBtn1 = dessertBtn[index]
@@ -253,6 +255,7 @@ function addItems(index) {
   //confirming order button event
   confirmOrder.addEventListener("click", () => {
     absoluteDiv.classList.remove('hide')
+    section.classList.add('sectionHeight')
     const orderDiv = document.createElement("div")
     orderDiv.classList.add("orderDiv")
     orderDiv.setAttribute('id', productData.name)
@@ -309,6 +312,7 @@ function addItems(index) {
   const resetOrder = () => {
     count = 0
     absoluteDiv.classList.add('hide')
+    section.classList.remove('sectionHeight')
     cartNumberAdded.innerText = `(0)`
     document.querySelector('.Cdiv').innerHTML = ""
     document.querySelector('.orderSum').classList.add('hide');
